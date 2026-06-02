@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(py -3 -c ':*)",
+      "Read(//c/Users/ICrim/Downloads/memos/**)",
+      "Bash(java -version)",
+      "Bash(flutter --version)",
+      "Bash(npx expo:*)",
+      "Bash(where adb:*)",
+      "Bash(flutter doctor:*)",
+      "Read(//c/Program Files/Android/Android Studio/**)",
+      "Bash(powershell -Command ':*)",
+      "Bash(rm -f package.json main.js preload.js)",
+      "Bash(rm -rf src node_modules)",
+      "Bash(flutter create:*)",
+      "Bash(flutter pub:*)"
+    ]
+  }
+}
