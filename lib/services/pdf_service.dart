@@ -129,16 +129,18 @@ Future<Uint8List> generateInvoicePdf(Invoice invoice) async {
               horizontalInside: pw.BorderSide(color: _borderC, width: 0.5),
             ),
             columnWidths: const {
-              0: pw.FixedColumnWidth(40),
-              1: pw.FlexColumnWidth(),
-              2: pw.FixedColumnWidth(80),
-              3: pw.FixedColumnWidth(90),
+              0: pw.FixedColumnWidth(42),
+              1: pw.FixedColumnWidth(36),
+              2: pw.FlexColumnWidth(),
+              3: pw.FixedColumnWidth(75),
+              4: pw.FixedColumnWidth(85),
             },
             children: [
               // Header row
               pw.TableRow(
                 decoration: const pw.BoxDecoration(color: _blue),
                 children: [
+                  _th('Bags', align: pw.TextAlign.center),
                   _th('Qty'),
                   _th('Product Description'),
                   _th('Price / Unit', align: pw.TextAlign.right),
@@ -154,6 +156,8 @@ Future<Uint8List> generateInvoicePdf(Invoice invoice) async {
                     color: even ? PdfColors.white : const PdfColor.fromInt(0xFFFAFBFC),
                   ),
                   children: [
+                    _td(item.noOfBags > 0 ? item.noOfBags.toString() : '—',
+                        align: pw.TextAlign.center),
                     _td(_qty(item.quantity)),
                     _td(item.itemName),
                     _td(_fmt(item.priceEach), align: pw.TextAlign.right),
@@ -167,6 +171,7 @@ Future<Uint8List> generateInvoicePdf(Invoice invoice) async {
                   color: PdfColor.fromInt(0xFFF0F5FF),
                 ),
                 children: [
+                  _td(''),
                   _td(''),
                   _td(''),
                   pw.Padding(
@@ -296,7 +301,7 @@ pw.Widget _metaDivider() => pw.Container(
 
 pw.Widget _th(String text, {pw.TextAlign align = pw.TextAlign.left}) =>
     pw.Padding(
-      padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+      padding: const pw.EdgeInsets.symmetric(horizontal: 5, vertical: 7),
       child: pw.Text(text,
           textAlign: align,
           style: pw.TextStyle(
@@ -307,7 +312,7 @@ pw.Widget _th(String text, {pw.TextAlign align = pw.TextAlign.left}) =>
 
 pw.Widget _td(String text, {pw.TextAlign align = pw.TextAlign.left}) =>
     pw.Padding(
-      padding: const pw.EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+      padding: const pw.EdgeInsets.symmetric(horizontal: 5, vertical: 6),
       child: pw.Text(text,
           textAlign: align,
           style: const pw.TextStyle(fontSize: 10)),

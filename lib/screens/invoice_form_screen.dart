@@ -11,6 +11,7 @@ class _ItemEntry {
   String itemName = '';
   bool isManual = false; // true = user typed manually
   final TextEditingController manualCtrl = TextEditingController();
+  final TextEditingController bagsCtrl   = TextEditingController();
   final TextEditingController qtyCtrl    = TextEditingController();
   final TextEditingController priceCtrl  = TextEditingController();
 
@@ -19,6 +20,7 @@ class _ItemEntry {
       itemName      = from.itemName;
       isManual      = true;
       manualCtrl.text = from.itemName;
+      bagsCtrl.text = from.noOfBags > 0 ? from.noOfBags.toString() : '';
       qtyCtrl.text  = _fmt(from.quantity);
       priceCtrl.text = _fmt(from.priceEach);
     }
@@ -30,6 +32,7 @@ class _ItemEntry {
   double get qty    => double.tryParse(qtyCtrl.text)   ?? 0;
   double get price  => double.tryParse(priceCtrl.text) ?? 0;
   double get amount => qty * price;
+  int    get bags   => int.tryParse(bagsCtrl.text.trim()) ?? 0;
 
   String get effectiveName =>
       isManual ? manualCtrl.text.trim() : itemName.trim();
@@ -40,10 +43,12 @@ class _ItemEntry {
         quantity: qty,
         priceEach: price,
         amount: amount,
+        noOfBags: bags,
       );
 
   void dispose() {
     manualCtrl.dispose();
+    bagsCtrl.dispose();
     qtyCtrl.dispose();
     priceCtrl.dispose();
   }
@@ -594,6 +599,38 @@ class _InvoiceFormScreenState extends State<InvoiceFormScreen> {
           ),
 
           const SizedBox(height: 10),
+
+          // No of Bags
+          Padding(
+            padding: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+            child: Row(
+              children: [
+                const Icon(Icons.inventory_2_outlined,
+                    size: 18, color: kMuted),
+                const SizedBox(width: 6),
+                const Text('No of Bags',
+                    style: TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: kMuted)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: entry.bagsCtrl,
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(
+                      hintText: '0',
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 10),
+                    ),
+                    onChanged: (_) => setState(() {}),
+                  ),
+                ),
+              ],
+            ),
+          ),
 
           // Qty | Price | Amount
           Padding(

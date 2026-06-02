@@ -6,6 +6,7 @@ class InvoiceItem {
   final double quantity;
   final double priceEach;
   final double amount;
+  final int noOfBags;
 
   InvoiceItem({
     this.itemName = '',
@@ -13,6 +14,7 @@ class InvoiceItem {
     required this.quantity,
     required this.priceEach,
     required this.amount,
+    this.noOfBags = 0,
   });
 
   factory InvoiceItem.fromJson(Map<String, dynamic> j) => InvoiceItem(
@@ -21,6 +23,7 @@ class InvoiceItem {
         quantity: (j['quantity'] as num).toDouble(),
         priceEach: (j['priceEach'] as num).toDouble(),
         amount: (j['amount'] as num).toDouble(),
+        noOfBags: (j['noOfBags'] as num?)?.toInt() ?? 0,
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class InvoiceItem {
         'quantity': quantity,
         'priceEach': priceEach,
         'amount': amount,
+        'noOfBags': noOfBags,
       };
 
   InvoiceItem copyWith({
@@ -37,6 +41,7 @@ class InvoiceItem {
     double? quantity,
     double? priceEach,
     double? amount,
+    int? noOfBags,
   }) =>
       InvoiceItem(
         itemName: itemName ?? this.itemName,
@@ -44,6 +49,7 @@ class InvoiceItem {
         quantity: quantity ?? this.quantity,
         priceEach: priceEach ?? this.priceEach,
         amount: amount ?? this.amount,
+        noOfBags: noOfBags ?? this.noOfBags,
       );
 }
 

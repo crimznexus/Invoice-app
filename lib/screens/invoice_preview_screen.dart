@@ -250,6 +250,10 @@ class InvoicePreviewScreen extends StatelessWidget {
                         child: const Row(children: [
                           SizedBox(
                               width: 36,
+                              child: Text('Bags', style: _thStyle)),
+                          SizedBox(width: 6),
+                          SizedBox(
+                              width: 36,
                               child: Text('Qty', style: _thStyle)),
                           SizedBox(width: 6),
                           Expanded(
@@ -257,13 +261,13 @@ class InvoicePreviewScreen extends StatelessWidget {
                                   style: _thStyle)),
                           SizedBox(width: 6),
                           SizedBox(
-                              width: 74,
+                              width: 64,
                               child: Text('Price/Unit',
                                   textAlign: TextAlign.right,
                                   style: _thStyle)),
                           SizedBox(width: 6),
                           SizedBox(
-                              width: 78,
+                              width: 70,
                               child: Text('Amount',
                                   textAlign: TextAlign.right,
                                   style: _thStyle)),
@@ -286,6 +290,15 @@ class InvoicePreviewScreen extends StatelessWidget {
                           child: Row(children: [
                             SizedBox(
                                 width: 36,
+                                child: Text(
+                                    item.noOfBags > 0
+                                        ? item.noOfBags.toString()
+                                        : '—',
+                                    style: _tdStyle),
+                            ),
+                            const SizedBox(width: 6),
+                            SizedBox(
+                                width: 36,
                                 child: Text(_qty(item.quantity),
                                     style: _tdStyle)),
                             const SizedBox(width: 6),
@@ -294,13 +307,13 @@ class InvoicePreviewScreen extends StatelessWidget {
                                     style: _tdStyle)),
                             const SizedBox(width: 6),
                             SizedBox(
-                                width: 74,
+                                width: 64,
                                 child: Text(_fmt(item.priceEach),
                                     textAlign: TextAlign.right,
                                     style: _tdStyle)),
                             const SizedBox(width: 6),
                             SizedBox(
-                                width: 78,
+                                width: 70,
                                 child: Text(_fmt(item.amount),
                                     textAlign: TextAlign.right,
                                     style: const TextStyle(
@@ -332,7 +345,7 @@ class InvoicePreviewScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 6),
                           SizedBox(
-                              width: 78,
+                              width: 70,
                               child: Text(_fmt(invoice.total),
                                   textAlign: TextAlign.right,
                                   style: const TextStyle(
